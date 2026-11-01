@@ -1,0 +1,50 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "Call ${applicationName}": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "呼叫 ${applicationName}"
+          }
+        }
+      }
+    },
+    "Call ${bot} in ${applicationName}": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在 ${applicationName} 中呼叫 ${bot}"
+          }
+        }
+      }
+    },
+    "Talk to ${applicationName}": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "与 ${applicationName} 对话"
+          }
+        }
+      }
+    },
+    "Talk to ${bot} in ${applicationName}": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在 ${applicationName} 中与 ${bot} 对话"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
