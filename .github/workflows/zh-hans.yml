@@ -48,18 +48,27 @@ jobs:
           grep -c "warning:" build.log || true
 
       - name: Collect extracted strings
+        if: always()
         run: |
           mkdir -p strings
-          find dd/Build/Intermediates.noindex -name '*.stringsdata' -print0 | xargs -0 -I{} cp {} strings/ 2>/dev/null || true
-          ls strings | wc -l
+          if [ -d dd/Build/Intermediates.noindex ]; then
+            find dd/Build/Intermediates.noindex -name '*.stringsdata' -print0 | while IFS= read -r -d '' file; do
+              # Keep distinct files even when separate modules use the same basename.
+              id=$(printf '%s' "$file" | shasum -a 256 | cut -c 1-20)
+              cp "$file" "strings/${id}.stringsdata"
+            done
+          fi
+          echo "Extracted files: $(find strings -name '*.stringsdata' | wc -l)"
           tar -czf stringsdata.tgz strings
 
       - name: Package IPA
         run: |
           APP=$(find dd/Build/Products/Release-iphoneos -maxdepth 1 -name '*.app' | head -1)
           echo "APP=$APP"
+          test -n "$APP" && test -d "$APP"
           ls -d "$APP"/*.lproj || true
           /usr/libexec/PlistBuddy -c "Print :CFBundleLocalizations" "$APP/Info.plist" || true
+          test -f "$APP/zh-Hans.lproj/Localizable.strings" || { echo "::error::Missing compiled Simplified Chinese localization"; exit 1; }
           mkdir -p ipa/Payload
           cp -R "$APP" ipa/Payload/
           (cd ipa && zip -qry ../Hermes-zh-Hans-unsigned.ipa Payload)
