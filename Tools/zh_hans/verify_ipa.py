@@ -3,6 +3,7 @@
 import json
 import pathlib
 import plistlib
+import re
 import sys
 import zipfile
 
@@ -31,6 +32,7 @@ def main():
         if not isinstance(entries, dict):
             raise ValueError("Compiled localization is not a dictionary")
         matched = None
+        info_matched = None
         if "--verify-catalog" in sys.argv:
             source = pathlib.Path(__file__).resolve().parents[2] / "App/Resources/Localizable.xcstrings"
             catalog = json.loads(source.read_text(encoding="utf-8"))["strings"]
@@ -48,6 +50,21 @@ def main():
                 preview = dict(list(mismatches.items())[:6])
                 raise ValueError(f"{len(mismatches)} compiled/catalog mismatches: {preview}")
             matched = len(expected)
+            info_strings = prefix + "zh-Hans.lproj/InfoPlist.strings"
+            if info_strings not in names:
+                raise ValueError("Compiled zh-Hans InfoPlist.strings missing")
+            info_entries = plistlib.loads(z.read(info_strings))
+            info_source = (pathlib.Path(__file__).resolve().parents[2] /
+                           "App/Resources/zh-Hans.lproj/InfoPlist.strings")
+            expected_info = dict(re.findall(
+                r'^"([^"]+)"\s*=\s*"([^"]+)";\s*$',
+                info_source.read_text(encoding="utf-8"), re.MULTILINE
+            ))
+            if len(expected_info) < 5:
+                raise ValueError("Not enough translated iOS permission purpose strings")
+            if any(info_entries.get(k) != v for k, v in expected_info.items()):
+                raise ValueError("Compiled InfoPlist purpose strings differ from zh-Hans source")
+            info_matched = len(expected_info)
         print(json.dumps({
             "ipa": path.name,
             "zip_integrity": "PASS",
@@ -56,6 +73,7 @@ def main():
             "bundle_display_name": info.get("CFBundleDisplayName"),
             "compiled_zh_hans_entries": len(entries),
             "compiled_catalog_entries_verified": matched,
+            "compiled_info_plist_entries_verified": info_matched,
             "size_bytes": path.stat().st_size,
         }, ensure_ascii=False, indent=2))
         return 0

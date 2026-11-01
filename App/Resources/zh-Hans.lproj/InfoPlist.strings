@@ -1,0 +1,6 @@
+"CFBundleDisplayName" = "Hermes";
+"NSLocalNetworkUsageDescription" = "Hermes 需要访问本地网络，以连接运行在局域网中的 Hermes Agent 网关。";
+"NSCameraUsageDescription" = "拍摄照片与 Hermes 分享，或扫描配对二维码以连接网关。";
+"NSMicrophoneUsageDescription" = "用于听写消息及与 Hermes 进行语音通话。你说的话会在本设备上转换成文字。";
+"NSSpeechRecognitionUsageDescription" = "在本设备上将语音转换成文字，以支持听写和语音模式。";
+"NSFaceIDUsageDescription" = "在批准付款或其他不可撤销的操作前，使用面容 ID 确认是你本人。";
