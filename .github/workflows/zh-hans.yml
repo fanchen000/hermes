@@ -92,6 +92,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           TAG=zh-hans-preview-$(date -u +%Y%m%d%H%M)
-          gh release create "$TAG" Hermes-zh-Hans-unsigned.ipa --repo "$GITHUB_REPOSITORY" \
+          gh release create "$TAG" Hermes-zh-Hans-unsigned.ipa --prerelease --repo "$GITHUB_REPOSITORY" \
             --title "Hermes 简体中文预览版 $TAG" \
             --notes "Unsigned sideload preview IPA for LiveContainer / SideStore. A curated subset of the interface is translated into zh-Hans; untranslated screens may still show English. This is NOT a fully localized build."
