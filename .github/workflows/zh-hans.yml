@@ -1,88 +1,85 @@
 name: zh-Hans build
 
 # Builds a Simplified-Chinese Hermes for sideloading (LiveContainer / SideStore).
-#   stage=export -> exportLocalizations, uploads the zh-Hans .xcloc to translate
-#   stage=build  -> imports Localization/zh-Hans.xliff, builds an unsigned iOS IPA, publishes a release
+# Every run builds the iOS app unsigned, uploads the compiler-extracted strings (.stringsdata)
+# so the zh-Hans catalog can be (re)translated, and publishes the IPA as a release when
+# publish=yes. The translations live in App/Resources/Localizable.xcstrings.
 on:
   workflow_dispatch:
     inputs:
-      stage:
-        description: export | build
+      publish:
+        description: publish a release (yes/no)
         required: true
-        default: export
+        default: "no"
 
 jobs:
-  run:
+  build:
     runs-on: macos-26
-    timeout-minutes: 120
+    timeout-minutes: 150
     steps:
       - uses: actions/checkout@v5
 
-      - name: Select Xcode 27
+      - name: Select Xcode
         run: |
-          ls -d /Applications/Xcode*.app
           XC=$(ls -d /Applications/Xcode_27*.app 2>/dev/null | sort -V | tail -1)
           if [ -z "$XC" ]; then XC=$(ls -d /Applications/Xcode*.app | sort -V | tail -1); fi
           sudo xcode-select -s "$XC"
           xcodebuild -version
-          xcodebuild -showsdks | grep -i ios
           # Upstream targets Xcode 27; on an older Xcode compile the existing iOS 26 fallbacks only.
           MAJOR=$(xcodebuild -version | awk '/^Xcode/{split($2,v,"."); print v[1]}')
-          if [ "$MAJOR" -lt 27 ]; then echo "SDKFLAGS=-DHERMES_SDK26 -Xfrontend -solver-expression-time-threshold=900" >> "$GITHUB_ENV"; else echo "SDKFLAGS=" >> "$GITHUB_ENV"; fi
+          if [ "$MAJOR" -lt 27 ]; then
+            echo "SDKFLAGS=-DHERMES_SDK26 -Xfrontend -solver-expression-time-threshold=900" >> "$GITHUB_ENV"
+          else
+            echo "SDKFLAGS=" >> "$GITHUB_ENV"
+          fi
 
       - name: Generate project
         run: |
           brew install xcodegen
           xcodegen generate
 
-      - name: Resolve packages
-        run: xcodebuild -resolvePackageDependencies -project Hermes.xcodeproj -scheme Hermes
-
-      - name: Export localizations
-        if: inputs.stage == 'export'
-        run: |
-          set -o pipefail
-          mkdir -p out
-          xcodebuild -exportLocalizations -project Hermes.xcodeproj \
-            -localizationPath out -exportLanguage zh-Hans \
-            -sdk iphoneos CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO "OTHER_SWIFT_FLAGS=\$(inherited) $SDKFLAGS" > out/export.log 2>&1 || {
-              grep -E "error:" out/export.log | sort -u | head -80; exit 1; }
-          find out -maxdepth 3 | head -50
-
-      - uses: actions/upload-artifact@v4
-        if: always() && inputs.stage == 'export'
-        with:
-          name: zh-Hans-xcloc
-          path: out
-
-      - name: Import translations
-        if: inputs.stage == 'build'
-        run: |
-          xcodebuild -importLocalizations -project Hermes.xcodeproj \
-            -localizationPath Localization/zh-Hans.xliff -mergeImport 2>&1 | tail -30
-
-      - name: Build unsigned IPA
-        if: inputs.stage == 'build'
+      - name: Build unsigned iOS app
         run: |
           xcodebuild -project Hermes.xcodeproj -scheme Hermes -configuration Release \
-            -sdk iphoneos -destination 'generic/platform=iOS' \
-            -derivedDataPath dd \
-            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
-            DEVELOPMENT_TEAM="" "OTHER_SWIFT_FLAGS=\$(inherited) $SDKFLAGS" build > build.log 2>&1 || { grep -E "error:" build.log | sort -u | head -80; exit 1; }
+            -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath dd \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" DEVELOPMENT_TEAM="" \
+            SWIFT_EMIT_LOC_STRINGS=YES "OTHER_SWIFT_FLAGS=\$(inherited) $SDKFLAGS" \
+            build > build.log 2>&1 || { grep -E "error:" build.log | sort -u | head -80; exit 1; }
+          grep -c "warning:" build.log || true
+
+      - name: Collect extracted strings
+        run: |
+          mkdir -p strings
+          find dd/Build/Intermediates.noindex -name '*.stringsdata' -print0 | xargs -0 -I{} cp {} strings/ 2>/dev/null || true
+          ls strings | wc -l
+          tar -czf stringsdata.tgz strings
+
+      - name: Package IPA
+        run: |
           APP=$(find dd/Build/Products/Release-iphoneos -maxdepth 1 -name '*.app' | head -1)
           echo "APP=$APP"
-          ls "$APP" | head -50
-          ls -d "$APP"/*.lproj
+          ls -d "$APP"/*.lproj || true
+          /usr/libexec/PlistBuddy -c "Print :CFBundleLocalizations" "$APP/Info.plist" || true
           mkdir -p ipa/Payload
           cp -R "$APP" ipa/Payload/
           (cd ipa && zip -qry ../Hermes-zh-Hans-unsigned.ipa Payload)
           ls -la Hermes-zh-Hans-unsigned.ipa
 
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hermes-zh-build
+          path: |
+            stringsdata.tgz
+            Hermes-zh-Hans-unsigned.ipa
+            build.log
+
       - name: Publish release
-        if: inputs.stage == 'build'
+        if: inputs.publish == 'yes'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           TAG=zh-hans-$(date -u +%Y%m%d%H%M)
           gh release create "$TAG" Hermes-zh-Hans-unsigned.ipa --repo "$GITHUB_REPOSITORY" \
-            --title "Hermes 简体中文版 $TAG" --notes "Unsigned IPA with zh-Hans localization, for LiveContainer / SideStore."
+            --title "Hermes 简体中文版 $TAG" \
+            --notes "Unsigned IPA with a zh-Hans localization, for LiveContainer / SideStore. Built from the zh-hans branch."
