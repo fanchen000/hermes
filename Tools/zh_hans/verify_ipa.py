@@ -33,6 +33,7 @@ def main():
             raise ValueError("Compiled localization is not a dictionary")
         matched = None
         info_matched = None
+        extension_matched = None
         if "--verify-catalog" in sys.argv:
             source = pathlib.Path(__file__).resolve().parents[2] / "App/Resources/Localizable.xcstrings"
             catalog = json.loads(source.read_text(encoding="utf-8"))["strings"]
@@ -65,6 +66,25 @@ def main():
             if any(info_entries.get(k) != v for k, v in expected_info.items()):
                 raise ValueError("Compiled InfoPlist purpose strings differ from zh-Hans source")
             info_matched = len(expected_info)
+            extension_matched = {}
+            for extension, source_path in (
+                ("HermesWidgets", "Push/Widgets/Localizable.xcstrings"),
+                ("HermesNotificationContent", "Push/NotificationContent/Localizable.xcstrings"),
+            ):
+                member = prefix + f"PlugIns/{extension}.appex/zh-Hans.lproj/Localizable.strings"
+                if member not in names:
+                    raise ValueError(f"Missing compiled extension translations: {extension}")
+                compiled = plistlib.loads(z.read(member))
+                ext_source = json.loads(
+                    (pathlib.Path(__file__).resolve().parents[2] / source_path).read_text(encoding="utf-8")
+                )["strings"]
+                expected_ext = {
+                    k: v["localizations"]["zh-Hans"]["stringUnit"]["value"]
+                    for k, v in ext_source.items()
+                }
+                if any(compiled.get(k) != v for k, v in expected_ext.items()):
+                    raise ValueError(f"Compiled extension strings do not match: {extension}")
+                extension_matched[extension] = len(expected_ext)
         print(json.dumps({
             "ipa": path.name,
             "zip_integrity": "PASS",
@@ -74,6 +94,7 @@ def main():
             "compiled_zh_hans_entries": len(entries),
             "compiled_catalog_entries_verified": matched,
             "compiled_info_plist_entries_verified": info_matched,
+            "compiled_extension_entries_verified": extension_matched,
             "size_bytes": path.stat().st_size,
         }, ensure_ascii=False, indent=2))
         return 0

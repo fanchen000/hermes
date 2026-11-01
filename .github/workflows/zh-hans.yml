@@ -67,6 +67,7 @@ jobs:
       - name: Enforce complete Simplified Chinese catalog
         run: |
           python3 Tools/zh_hans/audit_catalog.py strings --require-full
+          python3 Tools/zh_hans/sync_extension_catalogs.py strings --check
 
       - name: Package IPA
         run: |

@@ -1,0 +1,94 @@
+{
+  "sourceLanguage": "en",
+  "version": "1.0",
+  "strings": {
+    "%@ needs you": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 需要你处理"
+          }
+        }
+      }
+    },
+    "%@ needs your permission": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 需要你的授权"
+          }
+        }
+      }
+    },
+    "%lld questions. Answer the first here, or open Hermes for all of them.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "有 %lld 个问题。可在此回答第一个，或打开 Hermes 处理全部。"
+          }
+        }
+      }
+    },
+    "Hermes is paused until you answer.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hermes 已暂停，等待你的回答。"
+          }
+        }
+      }
+    },
+    "Hermes is waiting for your answer.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hermes 正在等待你的回答。"
+          }
+        }
+      }
+    },
+    "Reply answers it on the card, and the card goes back to Ready.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "回复会在卡片上作答，随后卡片返回“就绪”状态。"
+          }
+        }
+      }
+    },
+    "Run this command?": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "执行此命令？"
+          }
+        }
+      }
+    },
+    "This question has expired.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此问题已过期。"
+          }
+        }
+      }
+    }
+  }
+}
