@@ -28,7 +28,7 @@ jobs:
           xcodebuild -showsdks | grep -i ios
           # Upstream targets Xcode 27; on an older Xcode compile the existing iOS 26 fallbacks only.
           MAJOR=$(xcodebuild -version | awk '/^Xcode/{split($2,v,"."); print v[1]}')
-          if [ "$MAJOR" -lt 27 ]; then echo "SDKFLAGS=-DHERMES_SDK26" >> "$GITHUB_ENV"; else echo "SDKFLAGS=" >> "$GITHUB_ENV"; fi
+          if [ "$MAJOR" -lt 27 ]; then echo "SDKFLAGS=-DHERMES_SDK26 -Xfrontend -solver-expression-time-threshold=900" >> "$GITHUB_ENV"; else echo "SDKFLAGS=" >> "$GITHUB_ENV"; fi
 
       - name: Generate project
         run: |
