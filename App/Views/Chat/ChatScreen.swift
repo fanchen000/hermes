@@ -87,7 +87,7 @@ struct ChatScreen: View {
         isWide && conversation.isKnownEmpty
     }
 
-    var body: some View {
+    private var chatFrame: some View {
         ZStack {
             Theme.canvas.ignoresSafeArea()
             CeilingMarker(ceiling: $ceiling)
@@ -167,6 +167,10 @@ struct ChatScreen: View {
             Text(confirmation.message.isEmpty ? String(localized: "Hermes asks before switching to this model.") : confirmation.message)
         }
         .onGeometryChange(for: CGSize.self) { $0.size } action: { screenSize = $0 }
+    }
+
+    var body: some View {
+        chatFrame
         // Steer from the inspector: the chat's composer takes the note.
         .onChange(of: conversation.helperSteerTarget) { _, target in
             if target != nil, isWide { composerFocused = true }
