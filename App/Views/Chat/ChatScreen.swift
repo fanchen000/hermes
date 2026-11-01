@@ -169,7 +169,7 @@ struct ChatScreen: View {
         .onGeometryChange(for: CGSize.self) { $0.size } action: { screenSize = $0 }
     }
 
-    var body: some View {
+    private var chatInteractions: some View {
         chatFrame
         // Steer from the inspector: the chat's composer takes the note.
         .onChange(of: conversation.helperSteerTarget) { _, target in
@@ -211,6 +211,10 @@ struct ChatScreen: View {
             AttachmentLoader.load(providers) { conversation.attachments.append($0) }
             return true
         }
+    }
+
+    var body: some View {
+        chatInteractions
         #if DEBUG
         // `-HERMES_OPEN_VOICE YES` starts Talk in the first chat that opens.
         .task {
