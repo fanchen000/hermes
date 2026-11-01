@@ -488,11 +488,13 @@ nonisolated final class InputFeed: @unchecked Sendable {
     static func make(target: AVAudioFormat, modules: [any SpeechModule], analyzer: AsyncStream<AnalyzerInput>.Continuation,
                      events: AsyncStream<SpeechInput.Event>.Continuation, gate: OSAllocatedUnfairLock<Float?>? = nil) async throws -> InputFeed {
         var modern: AnyObject?
+        #if !HERMES_SDK26
         if #available(iOS 27, macOS 27, *), !modules.isEmpty, gate == nil {
             // 27 converts for the analyzer itself, keeping its timeline exact. A gated feed
             // converts itself, as it changes the samples on the way.
             modern = try? await AnalyzerInputConverter.converter(compatibleWith: modules)
         }
+        #endif
         return InputFeed(target: target, modernConverter: modern, analyzer: analyzer, events: events, scriptedOnly: modules.isEmpty, gate: gate)
     }
 
@@ -510,11 +512,13 @@ nonisolated final class InputFeed: @unchecked Sendable {
         guard !scriptedOnly else { return }
         let fed = timeFed.seconds
         clock.withLock { $0.buffer(at: start, fed: fed) }
+        #if !HERMES_SDK26
         if #available(iOS 27, macOS 27, *), let modern = modernConverter as? AnalyzerInputConverter {
             guard let inputs = try? modern.convert(buffer, at: nil) else { return }
             for input in inputs { yield(input, frames: input.bufferDuration) }
             return
         }
+        #endif
         guard let output = convert(buffer) else { return }
         if gate != nil {
             gate?.threshold = gateThreshold?.withLock { $0 }

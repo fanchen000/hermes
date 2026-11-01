@@ -82,6 +82,9 @@ public final class LiveAudioPlatform: AudioPlatform {
             // Haptics and the sounds Talk plays still work while the microphone is on.
             try? session.setAllowHapticsAndSystemSoundsDuringRecording(true)
         }
+        #if HERMES_SDK26
+        try session.setActive(true)
+        #else
         if #available(iOS 27, *) {
             try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, any Error>) in
                 session.activate(options: []) { _, error in
@@ -92,6 +95,7 @@ public final class LiveAudioPlatform: AudioPlatform {
             try session.setActive(true)
         }
         #endif
+        #endif
         try graph.prepare(voiceProcessing: profile.voiceProcessing, usesInput: profile.category == .playAndRecord)
     }
 
@@ -99,6 +103,9 @@ public final class LiveAudioPlatform: AudioPlatform {
         graph.stop()
         #if os(iOS)
         let session = AVAudioSession.sharedInstance()
+        #if HERMES_SDK26
+        try? session.setActive(false, options: .notifyOthersOnDeactivation)
+        #else
         if #available(iOS 27, *) {
             await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
                 session.deactivate(options: .notifyOthersOnDeactivation) { _, _ in continuation.resume() }
@@ -106,6 +113,7 @@ public final class LiveAudioPlatform: AudioPlatform {
         } else {
             try? session.setActive(false, options: .notifyOthersOnDeactivation)
         }
+        #endif
         #endif
     }
 
@@ -127,6 +135,21 @@ public final class LiveAudioPlatform: AudioPlatform {
         })
 
         #if os(iOS)
+        #if HERMES_SDK26
+            tokens.append(center.addObserver(forName: AVAudioSession.interruptionNotification, object: nil, queue: nil) { note in
+                guard let raw = note.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt,
+                      let type = AVAudioSession.InterruptionType(rawValue: raw) else { return }
+                switch type {
+                case .began:
+                    continuation.yield(.interruptionBegan)
+                case .ended:
+                    let options = (note.userInfo?[AVAudioSessionInterruptionOptionKey] as? UInt).map(AVAudioSession.InterruptionOptions.init(rawValue:)) ?? []
+                    continuation.yield(.interruptionEnded(shouldResume: options.contains(.shouldResume)))
+                @unknown default:
+                    break
+                }
+            })
+        #else
         if #available(iOS 27, *) {
             tokens.append(center.addObserver(forName: AVAudioSession.didBecomeInactiveNotification, object: nil, queue: nil) { note in
                 let context = note.userInfo?[AVAudioSession.deactivationContextKey] as? AVAudioSession.DeactivationContext
@@ -152,6 +175,7 @@ public final class LiveAudioPlatform: AudioPlatform {
                 }
             })
         }
+        #endif
         tokens.append(center.addObserver(forName: AVAudioSession.routeChangeNotification, object: nil, queue: nil) { note in
             let raw = note.userInfo?[AVAudioSessionRouteChangeReasonKey] as? UInt
             let reason: AudioRouteChangeReason = switch raw.flatMap(AVAudioSession.RouteChangeReason.init(rawValue:)) {

@@ -457,7 +457,11 @@ final class DrawerSwipe {
     /// drawer uses the system's, as `List` does. Before it, only `List` rows swiped and the drawer
     /// draws its own (`DrawerSwipeActions`); both on one row fought over the drag.
     static var isSystems: Bool {
+        #if HERMES_SDK26
+        false
+        #else
         if #available(iOS 27.0, macOS 27.0, *) { true } else { false }
+        #endif
     }
 }
 
@@ -481,11 +485,15 @@ struct DrawerSwipeState<Value: Hashable>: ViewModifier {
 /// closed by scrolling or a tap elsewhere.
 struct DrawerSwipeContainer: ViewModifier {
     func body(content: Content) -> some View {
+        #if HERMES_SDK26
+        content
+        #else
         if #available(iOS 27.0, macOS 27.0, *) {
             content.swipeActionsContainer()
         } else {
             content
         }
+        #endif
     }
 }
 

@@ -26,6 +26,9 @@ jobs:
           sudo xcode-select -s "$XC"
           xcodebuild -version
           xcodebuild -showsdks | grep -i ios
+          # Upstream targets Xcode 27; on an older Xcode compile the existing iOS 26 fallbacks only.
+          MAJOR=$(xcodebuild -version | awk '/^Xcode/{split($2,v,"."); print v[1]}')
+          if [ "$MAJOR" -lt 27 ]; then echo "SDKFLAGS=-DHERMES_SDK26" >> "$GITHUB_ENV"; else echo "SDKFLAGS=" >> "$GITHUB_ENV"; fi
 
       - name: Generate project
         run: |
@@ -42,7 +45,7 @@ jobs:
           mkdir -p out
           xcodebuild -exportLocalizations -project Hermes.xcodeproj \
             -localizationPath out -exportLanguage zh-Hans \
-            -sdk iphoneos CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO > out/export.log 2>&1 || {
+            -sdk iphoneos CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO "OTHER_SWIFT_FLAGS=\$(inherited) $SDKFLAGS" > out/export.log 2>&1 || {
               grep -E "error:" out/export.log | sort -u | head -80; exit 1; }
           find out -maxdepth 3 | head -50
 
@@ -65,7 +68,7 @@ jobs:
             -sdk iphoneos -destination 'generic/platform=iOS' \
             -derivedDataPath dd \
             CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
-            DEVELOPMENT_TEAM="" build 2>&1 | tail -60
+            DEVELOPMENT_TEAM="" "OTHER_SWIFT_FLAGS=\$(inherited) $SDKFLAGS" build > build.log 2>&1 || { grep -E "error:" build.log | sort -u | head -80; exit 1; }
           APP=$(find dd/Build/Products/Release-iphoneos -maxdepth 1 -name '*.app' | head -1)
           echo "APP=$APP"
           ls "$APP" | head -50

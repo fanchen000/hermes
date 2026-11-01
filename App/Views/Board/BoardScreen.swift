@@ -598,6 +598,9 @@ private struct DragSessionTracker: ViewModifier {
     let cardID: String
 
     func body(content: Content) -> some View {
+        #if HERMES_SDK26
+        content
+        #else
         if #available(iOS 27.0, macOS 26.0, *) {
             content.onDragSessionUpdated { session in
                 switch session.phase {
@@ -612,5 +615,6 @@ private struct DragSessionTracker: ViewModifier {
         } else {
             content
         }
+        #endif
     }
 }

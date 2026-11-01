@@ -2,7 +2,9 @@ import Foundation
 import HermesKit
 import HermesPush
 import MediaPlayer
+#if !HERMES_SDK26
 import NowPlaying
+#endif
 import Observation
 import SwiftUI
 
@@ -16,11 +18,15 @@ final class NowPlayingPublisher {
     private var targets: [(MPRemoteCommand, Any)] = []
 
     init(player: ListenPlayer) {
+        #if HERMES_SDK26
+        publishLegacy(player)
+        #else
         if #available(iOS 27, macOS 27, *) {
             session = MediaSession(ListenMediaModel(player: player))
         } else {
             publishLegacy(player)
         }
+        #endif
     }
 
     func end() {
@@ -29,12 +35,21 @@ final class NowPlayingPublisher {
         watcher = nil
         for (command, target) in targets { command.removeTarget(target) }
         targets = []
-        if #unavailable(iOS 27, macOS 27) {
+        if Self.usesLegacyNowPlaying {
             MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
             #if os(macOS)
             MPNowPlayingInfoCenter.default().playbackState = .stopped
             #endif
         }
+    }
+
+    /// 26 (or a build against the 26 SDK): MPNowPlayingInfoCenter is ours to clear.
+    private static var usesLegacyNowPlaying: Bool {
+        #if HERMES_SDK26
+        true
+        #else
+        if #unavailable(iOS 27, macOS 27) { true } else { false }
+        #endif
     }
 
     // MARK: 26: MediaPlayer
@@ -99,6 +114,7 @@ final class NowPlayingPublisher {
     }
 }
 
+#if !HERMES_SDK26
 /// What Listen shows in Now Playing on 27; the session watches it.
 @available(iOS 27, macOS 27, *)
 @MainActor
@@ -149,6 +165,8 @@ final class ListenMediaModel: MediaSessionRepresentable {
         ]
     }
 }
+
+#endif
 
 /// The Bot's face, still, as Now Playing artwork.
 @MainActor
