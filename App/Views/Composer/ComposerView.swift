@@ -105,9 +105,7 @@ struct ComposerView: View {
         }
     }
 
-    var body: some View {
-        // Matched once per update: it walks every skill and command.
-        let sections = slashSections
+    private func composerShell(sections: [SlashMenu.Section]) -> some View {
         VStack(spacing: 8) {
             if !sections.isEmpty {
                 SlashMenu(
@@ -196,6 +194,12 @@ struct ComposerView: View {
             Text("\(DeviceSetup.settingsPath(for: .camera)) You can still pick photos from your library.")
         }
         #endif
+    }
+
+    var body: some View {
+        // Matched once per update: it walks every skill and command.
+        let sections = slashSections
+        composerShell(sections: sections)
         // The composer changes height in one step and what comes into it fades in (an eased
         // height would slide the field under a row still fading in); the chat above eases to
         // its new end.
