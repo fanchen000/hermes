@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check an iOS IPA's actual compiled Chinese resources and minimum OS."""
+"""Check an IPA's compiled Chinese strings, integrity and minimum OS."""
 import json
 import pathlib
 import plistlib
@@ -30,6 +30,24 @@ def main():
             raise ValueError("Compiled Localizable.strings is not an Apple plist") from exc
         if not isinstance(entries, dict):
             raise ValueError("Compiled localization is not a dictionary")
+        matched = None
+        if "--verify-catalog" in sys.argv:
+            source = pathlib.Path(__file__).resolve().parents[2] / "App/Resources/Localizable.xcstrings"
+            catalog = json.loads(source.read_text(encoding="utf-8"))["strings"]
+            expected = {
+                k: v["localizations"]["zh-Hans"]["stringUnit"]["value"]
+                for k, v in catalog.items()
+                if "zh-Hans" in v.get("localizations", {})
+            }
+            mismatches = {
+                key: {"expected": value, "actual": entries.get(key)}
+                for key, value in expected.items()
+                if entries.get(key) != value
+            }
+            if mismatches:
+                preview = dict(list(mismatches.items())[:6])
+                raise ValueError(f"{len(mismatches)} compiled/catalog mismatches: {preview}")
+            matched = len(expected)
         print(json.dumps({
             "ipa": path.name,
             "zip_integrity": "PASS",
@@ -37,6 +55,7 @@ def main():
             "minimum_ios": info.get("MinimumOSVersion"),
             "bundle_display_name": info.get("CFBundleDisplayName"),
             "compiled_zh_hans_entries": len(entries),
+            "compiled_catalog_entries_verified": matched,
             "size_bytes": path.stat().st_size,
         }, ensure_ascii=False, indent=2))
         return 0

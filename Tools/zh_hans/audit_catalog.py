@@ -19,6 +19,7 @@ OUTPUT = ROOT / ".l10n_artifacts"
 # Placeholders may be printf-style, positional, or Swift's compiled substitution.
 PRINTF = re.compile(r"%(?:(?:[1-9]\d*)\$)?[-+# 0']*\d*(?:\.\d+)?(?:hh|ll|[hlLzjt])?[@dDuUxXfFeEgGcCsSpPaA%]")
 SWIFT = re.compile(r"\\\([^)]*\)")
+JS_TEMPLATE = re.compile(r"\$\{[^}]*\}")
 
 def tokens(value: str) -> list[str]:
     # Compare base type, not positional index: translators may reorder indices.
@@ -45,18 +46,35 @@ def main() -> int:
     translated = {}
     missing = []
     invalid = []
+    verbatim = {}
     for key, sources in sorted(keys["Localizable"].items()):
         node = existing.get(key, {})
         value = (node.get("localizations") or {}).get("zh-Hans", {}).get("stringUnit", {}).get("value")
         state = (node.get("localizations") or {}).get("zh-Hans", {}).get("stringUnit", {}).get("state")
-        if not isinstance(value, str) or not value.strip() or state != "translated":
+        approved_whitespace = (
+            value == key
+            and "intentionally unchanged (" in node.get("comment", "")
+        )
+        if (
+            not isinstance(value, str)
+            or (not value.strip() and not approved_whitespace)
+            or state != "translated"
+        ):
             missing.append({"key": key, "sources": sorted(sources)})
         else:
             translated[key] = value
+            if value == key:
+                comment = node.get("comment", "")
+                if "intentionally unchanged (" in comment:
+                    verbatim[key] = comment
+                elif re.search(r"[A-Za-z]{3}", key):
+                    invalid.append({"key": key, "reason": "unreviewed_verbatim_key"})
             if tokens(key) != tokens(value):
                 invalid.append({"key": key, "translation": value, "reason": "printf_placeholder_mismatch"})
             if SWIFT.findall(key) != SWIFT.findall(value):
                 invalid.append({"key": key, "translation": value, "reason": "swift_interpolation_mismatch"})
+            if JS_TEMPLATE.findall(key) != JS_TEMPLATE.findall(value):
+                invalid.append({"key": key, "translation": value, "reason": "javascript_interpolation_mismatch"})
             if key != value and not re.search("[\u3400-\u9fff]", value) and re.search("[A-Za-z]{3}", key):
                 invalid.append({"key": key, "translation": value, "reason": "possibly_untranslated"})
     OUTPUT.mkdir(exist_ok=True)
@@ -67,6 +85,9 @@ def main() -> int:
         "localizable_extracted": len(keys["Localizable"]),
         "localizable_translated": len(translated),
         "localizable_missing": len(missing),
+        "reviewed_verbatim_count": len(verbatim),
+        "natural_language_or_prior_translations": len(translated) - len(verbatim),
+        "full_catalog_coverage": (not missing and not invalid and not bad_files),
         "catalog_entries_total": len(existing),
         "catalog_entries_not_in_compiler_extract": len(set(existing) - set(keys["Localizable"])),
         "invalid_translations": invalid,
@@ -74,7 +95,7 @@ def main() -> int:
     (OUTPUT / "audit.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     (OUTPUT / "missing.json").write_text(json.dumps(missing, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(report, ensure_ascii=False, indent=2))
-    return 1 if bad_files or invalid else 0
+    return 1 if bad_files or invalid or ("--require-full" in sys.argv and missing) else 0
 
 if __name__ == "__main__":
     raise SystemExit(main())

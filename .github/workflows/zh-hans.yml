@@ -64,6 +64,10 @@ jobs:
           echo "Extracted files: $(find strings -name '*.stringsdata' | wc -l)"
           tar -czf stringsdata.tgz strings
 
+      - name: Enforce complete Simplified Chinese catalog
+        run: |
+          python3 Tools/zh_hans/audit_catalog.py strings --require-full
+
       - name: Package IPA
         run: |
           APP=$(find dd/Build/Products/Release-iphoneos -maxdepth 1 -name '*.app' | head -1)
@@ -76,6 +80,10 @@ jobs:
           cp -R "$APP" ipa/Payload/
           (cd ipa && zip -qry ../Hermes-zh-Hans-unsigned.ipa Payload)
           ls -la Hermes-zh-Hans-unsigned.ipa
+
+      - name: Verify compiled IPA matches every catalog translation
+        run: |
+          python3 Tools/zh_hans/verify_ipa.py Hermes-zh-Hans-unsigned.ipa --verify-catalog
 
       - uses: actions/upload-artifact@v4
         if: always()
@@ -94,4 +102,4 @@ jobs:
           TAG=zh-hans-preview-$(date -u +%Y%m%d%H%M)
           gh release create "$TAG" Hermes-zh-Hans-unsigned.ipa --prerelease --repo "$GITHUB_REPOSITORY" \
             --title "Hermes 简体中文预览版 $TAG" \
-            --notes "Unsigned sideload preview IPA for LiveContainer / SideStore. A curated subset of the interface is translated into zh-Hans; untranslated screens may still show English. This is NOT a fully localized build."
+            --notes "Unsigned IPA for LiveContainer / SideStore. All compiler-extracted Localizable strings have Simplified Chinese or explicitly reviewed unchanged technical content, enforced by CI. Real-device UI and side-load signing still require validation before a final release."
