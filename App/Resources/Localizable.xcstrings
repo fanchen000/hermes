@@ -12,6 +12,116 @@
         }
       }
     },
+    "1 Bot is ready in Bot Mode": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "智能体模式中已有 1 个智能体就绪"
+          }
+        }
+      }
+    },
+    "A chat with new messages opens at the first one, or at the latest. With Send with Return on, Shift-Return starts a new line on a hardware keyboard.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "有新消息时，可从第一条新消息或最新消息开始查看。启用回车发送后，使用实体键盘按 Shift + Return 可换行。"
+          }
+        }
+      }
+    },
+    "A few things worth trying first": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "先试试这些功能"
+          }
+        }
+      }
+    },
+    "About": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关于"
+          }
+        }
+      }
+    },
+    "Add Gateway…": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加网关…"
+          }
+        }
+      }
+    },
+    "Add Key…": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加密钥…"
+          }
+        }
+      }
+    },
+    "An independent app by Caffeinated Code for Hermes Agent, the open-source agent by Nous Research. Not affiliated with Nous Research.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本应用由 Caffeinated Code 独立开发，用于连接 Nous Research 开源的 Hermes Agent。与 Nous Research 无关联。"
+          }
+        }
+      }
+    },
+    "API keys are stored in the Keychain on this device.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API 密钥保存在本设备的钥匙串中。"
+          }
+        }
+      }
+    },
+    "Apps and Tools": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "应用与工具"
+          }
+        }
+      }
+    },
+    "Archive": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "归档"
+          }
+        }
+      }
+    },
     "Ask Hermes anything": {
       "extractionState": "manual",
       "localizations": {
@@ -45,6 +155,28 @@
         }
       }
     },
+    "Back": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "返回"
+          }
+        }
+      }
+    },
+    "Beta": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "测试版"
+          }
+        }
+      }
+    },
     "Bots": {
       "extractionState": "manual",
       "localizations": {
@@ -52,6 +184,39 @@
           "stringUnit": {
             "state": "translated",
             "value": "智能体"
+          }
+        }
+      }
+    },
+    "Bots are offline": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "智能体已离线"
+          }
+        }
+      }
+    },
+    "Bots offline · chats still work": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "智能体离线 · 对话功能仍可使用"
+          }
+        }
+      }
+    },
+    "Branch": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "创建分支"
           }
         }
       }
@@ -67,6 +232,17 @@
         }
       }
     },
+    "Cancel": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消"
+          }
+        }
+      }
+    },
     "Cancel dictation": {
       "extractionState": "manual",
       "localizations": {
@@ -78,6 +254,72 @@
         }
       }
     },
+    "Chat": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "对话"
+          }
+        }
+      }
+    },
+    "Check that hermes serve is running, or connect without Bot Mode for now.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请确认 hermes serve 正在运行，或先不启用智能体模式连接。"
+          }
+        }
+      }
+    },
+    "Check the password, or connect without Bot Mode and sign in later.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请检查密码，或先不启用智能体模式连接，稍后再登录。"
+          }
+        }
+      }
+    },
+    "Checkpoints let you take back a turn": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检查点可用于撤销一轮操作"
+          }
+        }
+      }
+    },
+    "Checkpoints…": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检查点…"
+          }
+        }
+      }
+    },
+    "Clear search": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除搜索"
+          }
+        }
+      }
+    },
     "Close": {
       "extractionState": "manual",
       "localizations": {
@@ -85,6 +327,17 @@
           "stringUnit": {
             "state": "translated",
             "value": "关闭"
+          }
+        }
+      }
+    },
+    "Close sidebar": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关闭侧边栏"
           }
         }
       }
@@ -111,6 +364,61 @@
         }
       }
     },
+    "Connect to your gateway": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "连接到你的网关"
+          }
+        }
+      }
+    },
+    "Connect Without Bot Mode": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不启用智能体模式直接连接"
+          }
+        }
+      }
+    },
+    "Connected": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已连接"
+          }
+        }
+      }
+    },
+    "Connected · busy, replies are slow": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已连接 · 设备繁忙，回复可能较慢"
+          }
+        }
+      }
+    },
+    "Connecting to your Bots…": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在连接智能体…"
+          }
+        }
+      }
+    },
     "Connecting…": {
       "extractionState": "manual",
       "localizations": {
@@ -122,6 +430,17 @@
         }
       }
     },
+    "Copy Session ID": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "复制会话 ID"
+          }
+        }
+      }
+    },
     "Couldn't load this chat": {
       "extractionState": "manual",
       "localizations": {
@@ -129,6 +448,50 @@
           "stringUnit": {
             "state": "translated",
             "value": "无法加载此对话"
+          }
+        }
+      }
+    },
+    "Create one to give it a name, a face and its own chat.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "创建一个智能体，为它设置名称、形象和专属对话。"
+          }
+        }
+      }
+    },
+    "Default": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "默认"
+          }
+        }
+      }
+    },
+    "Delete": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除"
+          }
+        }
+      }
+    },
+    "Delete…": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "删除…"
           }
         }
       }
@@ -177,6 +540,17 @@
         }
       }
     },
+    "Everything lives here": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有内容都在这里"
+          }
+        }
+      }
+    },
     "Explain what this command does and why you need it.": {
       "extractionState": "manual",
       "localizations": {
@@ -221,6 +595,94 @@
         }
       }
     },
+    "Free": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "免费"
+          }
+        }
+      }
+    },
+    "Gateway default": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "网关默认"
+          }
+        }
+      }
+    },
+    "Get to know Hermes": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "认识 Hermes"
+          }
+        }
+      }
+    },
+    "Got It": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "知道了"
+          }
+        }
+      }
+    },
+    "Group chat not found": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未找到群聊"
+          }
+        }
+      }
+    },
+    "Group chats and folders Hermes works in": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "将对话和 Hermes 工作的文件夹组织到一起"
+          }
+        }
+      }
+    },
+    "Hermes Agent documentation": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hermes Agent 文档"
+          }
+        }
+      }
+    },
+    "Hermes Agent on GitHub": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub 上的 Hermes Agent"
+          }
+        }
+      }
+    },
     "Hermes asks before switching to this model.": {
       "extractionState": "manual",
       "localizations": {
@@ -232,6 +694,17 @@
         }
       }
     },
+    "Hermes didn't report any other models. Configure providers with `hermes model` on the gateway.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hermes 未返回其他模型。请在网关端使用 `hermes model` 配置模型提供商。"
+          }
+        }
+      }
+    },
     "Hermes didn't take this message": {
       "extractionState": "manual",
       "localizations": {
@@ -239,6 +712,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hermes 未收到这条消息"
+          }
+        }
+      }
+    },
+    "Hermes Gateways": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hermes 网关"
+          }
+        }
+      }
+    },
+    "Hide Get to Know Hermes": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "隐藏 Hermes 入门介绍"
           }
         }
       }
@@ -265,6 +760,28 @@
         }
       }
     },
+    "It may have been deleted on the gateway.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可能已从网关中删除。"
+          }
+        }
+      }
+    },
+    "Its face says what it's doing": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通过表情了解当前状态"
+          }
+        }
+      }
+    },
     "Keep Current Model": {
       "extractionState": "manual",
       "localizations": {
@@ -272,6 +789,17 @@
           "stringUnit": {
             "state": "translated",
             "value": "保留当前模型"
+          }
+        }
+      }
+    },
+    "Let Hermes run a command": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "让 Hermes 执行命令"
           }
         }
       }
@@ -331,6 +859,50 @@
         }
       }
     },
+    "Manage Gateways…": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "管理网关…"
+          }
+        }
+      }
+    },
+    "Mark All as Read": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全部标为已读"
+          }
+        }
+      }
+    },
+    "Mark as Read": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "标为已读"
+          }
+        }
+      }
+    },
+    "Mark as Unread": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "标为未读"
+          }
+        }
+      }
+    },
     "Max": {
       "extractionState": "manual",
       "localizations": {
@@ -349,6 +921,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "中"
+          }
+        }
+      }
+    },
+    "Meet your Bots": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "认识你的智能体"
+          }
+        }
+      }
+    },
+    "Memory": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "记忆"
           }
         }
       }
@@ -375,6 +969,50 @@
         }
       }
     },
+    "Move to Project…": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移至项目…"
+          }
+        }
+      }
+    },
+    "Mute": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "静音"
+          }
+        }
+      }
+    },
+    "Needs a key": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "需要密钥"
+          }
+        }
+      }
+    },
+    "New Bot": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新建智能体"
+          }
+        }
+      }
+    },
     "New chat": {
       "extractionState": "manual",
       "localizations": {
@@ -382,6 +1020,39 @@
           "stringUnit": {
             "state": "translated",
             "value": "新建对话"
+          }
+        }
+      }
+    },
+    "No Bots yet": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暂无智能体"
+          }
+        }
+      }
+    },
+    "No chats yet": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暂无对话"
+          }
+        }
+      }
+    },
+    "No other models on this gateway": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此网关没有其他模型"
           }
         }
       }
@@ -397,6 +1068,17 @@
         }
       }
     },
+    "Not done": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未完成"
+          }
+        }
+      }
+    },
     "Off": {
       "extractionState": "manual",
       "localizations": {
@@ -408,6 +1090,17 @@
         }
       }
     },
+    "Offline": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "离线"
+          }
+        }
+      }
+    },
     "OK": {
       "extractionState": "manual",
       "localizations": {
@@ -415,6 +1108,17 @@
           "stringUnit": {
             "state": "translated",
             "value": "确定"
+          }
+        }
+      }
+    },
+    "On in Hermes and your Bots": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已在 Hermes 和智能体中开启"
           }
         }
       }
@@ -441,6 +1145,28 @@
         }
       }
     },
+    "Pages it builds, files it changes and its own screen open here. Tap to look.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hermes 创建的页面、修改的文件以及屏幕内容都显示在这里，点按即可查看。"
+          }
+        }
+      }
+    },
+    "Pair a Device…": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "配对设备…"
+          }
+        }
+      }
+    },
     "Paste": {
       "extractionState": "manual",
       "localizations": {
@@ -463,6 +1189,28 @@
         }
       }
     },
+    "Pin": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "置顶"
+          }
+        }
+      }
+    },
+    "Read": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已读"
+          }
+        }
+      }
+    },
     "Reasoning effort": {
       "extractionState": "manual",
       "localizations": {
@@ -470,6 +1218,39 @@
           "stringUnit": {
             "state": "translated",
             "value": "推理强度"
+          }
+        }
+      }
+    },
+    "Refresh models": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刷新模型"
+          }
+        }
+      }
+    },
+    "Rename": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重命名"
+          }
+        }
+      }
+    },
+    "Rename…": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重命名…"
           }
         }
       }
@@ -507,6 +1288,61 @@
         }
       }
     },
+    "Saved to Memory": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已保存至记忆"
+          }
+        }
+      }
+    },
+    "Search models": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "搜索模型"
+          }
+        }
+      }
+    },
+    "Send now and Hermes takes it into account right away, or hold it for after this turn.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "现在发送，Hermes 会立即考虑你的要求；也可以留到本轮结束后再发送。"
+          }
+        }
+      }
+    },
+    "Sign in to see your Bots": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登录以查看你的智能体"
+          }
+        }
+      }
+    },
+    "Sign In…": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登录…"
+          }
+        }
+      }
+    },
     "Sign-in needed": {
       "extractionState": "manual",
       "localizations": {
@@ -529,6 +1365,50 @@
         }
       }
     },
+    "So it can get to the point": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "让它更快理解你的需求"
+          }
+        }
+      }
+    },
+    "Source code on GitHub": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub 源代码"
+          }
+        }
+      }
+    },
+    "Start a project": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "创建项目"
+          }
+        }
+      }
+    },
+    "Steer while it works": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在执行过程中追加指令"
+          }
+        }
+      }
+    },
     "Switch": {
       "extractionState": "manual",
       "localizations": {
@@ -540,6 +1420,39 @@
         }
       }
     },
+    "Take back a turn": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "撤销一轮操作"
+          }
+        }
+      }
+    },
+    "Tell Hermes about you": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "告诉 Hermes 你的偏好"
+          }
+        }
+      }
+    },
+    "The conversation is removed from Hermes on every device.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "这段对话将从所有设备上的 Hermes 中删除。"
+          }
+        }
+      }
+    },
     "Think": {
       "extractionState": "manual",
       "localizations": {
@@ -547,6 +1460,17 @@
           "stringUnit": {
             "state": "translated",
             "value": "思考"
+          }
+        }
+      }
+    },
+    "Thinking, working, listening or asleep. Tap the face for the Bot's settings.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "思考、工作、聆听或休息时会显示不同表情，点按头像可打开智能体设置。"
           }
         }
       }
@@ -573,6 +1497,17 @@
         }
       }
     },
+    "Title": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "标题"
+          }
+        }
+      }
+    },
     "Try Again": {
       "extractionState": "manual",
       "localizations": {
@@ -580,6 +1515,17 @@
           "stringUnit": {
             "state": "translated",
             "value": "重试"
+          }
+        }
+      }
+    },
+    "Turn on undo for files": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开启文件撤销功能"
           }
         }
       }
@@ -595,6 +1541,17 @@
         }
       }
     },
+    "Undo puts the files back the way they were before this reply.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "撤销后，文件会恢复到本轮回复之前的状态。"
+          }
+        }
+      }
+    },
     "Undone · your message is back to edit": {
       "extractionState": "manual",
       "localizations": {
@@ -602,6 +1559,94 @@
           "stringUnit": {
             "state": "translated",
             "value": "已撤销 · 消息已恢复为可编辑状态"
+          }
+        }
+      }
+    },
+    "Unmute": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消静音"
+          }
+        }
+      }
+    },
+    "Unpin": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消置顶"
+          }
+        }
+      }
+    },
+    "Unread": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未读"
+          }
+        }
+      }
+    },
+    "Waiting for a busy Mac…": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在等待繁忙的 Mac…"
+          }
+        }
+      }
+    },
+    "What Hermes is working on": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hermes 正在做什么"
+          }
+        }
+      }
+    },
+    "What Hermes knows about you": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hermes 对你的了解"
+          }
+        }
+      }
+    },
+    "What’s using the disk?": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "哪些内容占用了磁盘？"
+          }
+        }
+      }
+    },
+    "Your chats, Bots, projects, the Board and Skills. Swipe from the left edge any time.": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "这里有你的对话、智能体、项目、看板和技能。随时从屏幕左侧边缘向右滑动即可打开。"
           }
         }
       }
