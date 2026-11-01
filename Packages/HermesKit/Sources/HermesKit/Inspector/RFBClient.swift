@@ -268,7 +268,7 @@ public struct RFBFramebuffer: Sendable {
         case .ready(let w, let h, _), .resized(let w, let h):
             resize(width: w, height: h)
         case .pixels(let x, let y, let w, let h, let data):
-            data.withUnsafeBytes { source in
+            data.withUnsafeBytes { (source: UnsafeRawBufferPointer) in
                 for row in 0..<h where y + row < height {
                     let columns = min(w, width - x)
                     guard columns > 0 else { continue }
